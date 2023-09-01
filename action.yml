@@ -3,6 +3,10 @@ description: 'Put description for action here'
 branding:
   icon: 'arrow-up-right'
   color: 'blue'
+outputs:
+  exported_file:
+    description: 'Path to the exported solution file'
+    value: ${{ steps.export-changes.outputs.exported_file }}
 inputs:
     dynamics-url:
         description: 'The URL of your Microsoft Dynamics instance'
@@ -15,6 +19,12 @@ inputs:
         required: true
     tenant-id:
         description: 'The Tenant ID of your Azure AD application connected to your Microsoft Dynamics instance app user'
+        required: true
+    solution-name:
+        description: 'The name of the solution you want to export'
+        required: true
+    version-number:
+        description: 'The version number you want to assign to this version of the solution'
         required: true
 runs:
   using: "composite"
@@ -30,10 +40,11 @@ runs:
       shell: bash
 
     - name: Publish all changes
+      id: export-changes
       shell: bash
       env:
         INSTANCE_URL: ${{ inputs.dynamics-url }}
         APPLICATION_ID: ${{ inputs.application-id }}
         APPLICATION_SECRET: ${{ inputs.application-secret }}
         TENANT_ID: ${{ inputs.tenant-id }}
-      run: php ${{ github.action_path }}/src/index.php
+      run: php ${{ github.action_path }}/src/index.php "${{ inputs.solution-name }}" "${{ inputs.version-number }}" "${{ github.action_path }}"
