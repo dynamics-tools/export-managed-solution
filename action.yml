@@ -36,7 +36,7 @@ runs:
         php-version: '8.2'
 
     - name: Install Dependencies
-      run: composer install -d ${{ github.action_path }}/src/ -o
+      run: composer install -d "${{ github.action_path }}/src/" -o
       shell: bash
 
     - name: Publish all changes
@@ -47,4 +47,4 @@ runs:
         APPLICATION_ID: ${{ inputs.application-id }}
         APPLICATION_SECRET: ${{ inputs.application-secret }}
         TENANT_ID: ${{ inputs.tenant-id }}
-      run: php ${{ github.action_path }}/src/index.php "${{ inputs.solution-name }}" "${{ inputs.version-number }}" "${{ github.action_path }}"
+      run: php "${{ github.action_path }}/src/index.php" "${{ inputs.solution-name }}" "${{ inputs.version-number }}" "${{ github.action_path }}"
