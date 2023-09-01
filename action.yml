@@ -1,5 +1,5 @@
-name: 'Put name to action here'
-description: 'Put description for action here'
+name: 'Export Managed Dynamics 365 Solution'
+description: 'This Github Action exports your managed solution and outputs you the file that contains your solution.'
 branding:
   icon: 'arrow-up-right'
   color: 'blue'
