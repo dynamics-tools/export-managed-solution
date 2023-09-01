@@ -28,7 +28,7 @@ To include this action in your GitHub Workflow, add the following step:
 ```yaml
     - name: Export Dynamics Solution
       id: export-dynamics-solution
-      uses: dynamics-tools/export-managed-solution@v1
+      uses: dynamics-tools/export-managed-solution@v1.0.0
       with:
         dynamics-url: 'https://example.com' # alternatively secrets.DYNAMICS_URL
         application-id: '0000-0000-0000-0000' # alternatively secrets.APPLICATION_ID
@@ -57,7 +57,7 @@ jobs:
 
     - name: Export Dynamics Solution
       id: export-dynamics-solution
-      uses: dynamics-tools/export-managed-solution@v1
+      uses: dynamics-tools/export-managed-solution@v1.0.0
       with:
         dynamics-url: secrets.DYNAMICS_URL
         application-id: secrets.APPLICATION_ID
