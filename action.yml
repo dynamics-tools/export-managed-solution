@@ -4,9 +4,12 @@ branding:
   icon: 'arrow-up-right'
   color: 'blue'
 outputs:
-  exported_file:
+  exported_file_path:
     description: 'Path to the exported solution file'
-    value: ${{ steps.export-changes.outputs.exported_file }}
+    value: ${{ steps.export-changes.outputs.exported_file_path }}
+  exported_file_base64:
+    description: 'Path to the exported solution file'
+    value: ${{ steps.export-changes.outputs.exported_file_base64 }}
 inputs:
     dynamics-url:
         description: 'The URL of your Microsoft Dynamics instance'
@@ -24,8 +27,8 @@ inputs:
         description: 'The name of the solution you want to export'
         required: true
     version-number:
-        description: 'The version number you want to assign to this version of the solution'
-        required: true
+        description: 'The version number you want to assign to this version of the solution. If left blank, a new solution version will not be cloned.'
+        required: false
 runs:
   using: "composite"
   steps:
@@ -47,4 +50,4 @@ runs:
         APPLICATION_ID: ${{ inputs.application-id }}
         APPLICATION_SECRET: ${{ inputs.application-secret }}
         TENANT_ID: ${{ inputs.tenant-id }}
-      run: php "${{ github.action_path }}/src/index.php" "${{ inputs.solution-name }}" "${{ inputs.version-number }}" "${{ github.action_path }}"
+      run: php "${{ github.action_path }}/src/index.php" "${{ inputs.solution-name }}" "${{ github.action_path }}" "${{ inputs.version-number }}"
