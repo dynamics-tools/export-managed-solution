@@ -34,5 +34,5 @@ $exportedSolution = json_decode($response->getBody(), true);
 $exportedSolutionFile = base64_decode($exportedSolution['ExportSolutionFile']);
 $filePath = $argv[2] . DIRECTORY_SEPARATOR . 'exported-solution.zip';
 file_put_contents($argv[2] . DIRECTORY_SEPARATOR . 'exported-solution.zip', $exportedSolutionFile);
-echo 'echo "exported_file_path=' . $filePath . '" >> $GITHUB_OUTPUT';
-echo 'echo "exported_file_base64=' . $exportedSolution['ExportSolutionFile'] . '" >> $GITHUB_OUTPUT';
+echo '"exported_file_path=' . $filePath . '" >> $GITHUB_OUTPUT';
+echo '"exported_file_base64=' . $exportedSolution['ExportSolutionFile'] . '" >> $GITHUB_OUTPUT';
