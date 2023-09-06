@@ -50,4 +50,10 @@ runs:
         APPLICATION_ID: ${{ inputs.application-id }}
         APPLICATION_SECRET: ${{ inputs.application-secret }}
         TENANT_ID: ${{ inputs.tenant-id }}
-      run: php "$GITHUB_ACTION_PATH/src/index.php" "${{ inputs.solution-name }}" "${{ github.action_path }}" "${{ inputs.version-number }}"
+      run: |
+        output=$(php "$GITHUB_ACTION_PATH/src/index.php" "${{ inputs.solution-name }}" "${{ github.action_path }}" "${{ inputs.version-number }}")
+        filepath=$(echo $output | cut -d'|' -f1)
+        base64=$(echo $output | cut -d'|' -f2)
+        echo "exported_file_path=$filepath" >> $GITHUB_OUTPUT
+        echo "exported_file_base64=$base64" >> $GITHUB_OUTPUT
+        
